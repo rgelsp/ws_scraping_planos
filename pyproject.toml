@@ -1,0 +1,19 @@
+[project]
+name = "ws-scraping-planos"
+version = "0.1.0"
+description = "Web scraping de planos de internet"
+authors = [
+    {name = "Rangel",email = "rgelsp@gamil.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas (>=3.0.1,<4.0.0)",
+    "ipykernel (>=7.2.0,<8.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
