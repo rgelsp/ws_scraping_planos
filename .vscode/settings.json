@@ -1,4 +1,14 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:poetry",
-    "python-envs.defaultPackageManager": "ms-python.python:poetry"
+    "python-envs.defaultPackageManager": "ms-python.python:poetry",
+    "spellright.language": [
+        "pt",
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "python"
+    ]
 }
