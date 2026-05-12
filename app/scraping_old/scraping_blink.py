@@ -23,7 +23,7 @@ from datetime import date
 def obter_html(municipio):
     # CONFIGURAÇÃO DO DRIVER
     options = Options()
-    options.add_argument("--headless=new")  # Não exbir a janela
+    #options.add_argument("--headless=new")  # Não exbir a janela
     options.add_argument("--window-size=1920,1080") # Maximizar a janela
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
