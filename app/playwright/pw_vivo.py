@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 from pathlib import Path
 import json
+import time
 
 with sync_playwright() as pw:
     navegador = pw.chromium.launch(headless=False)
@@ -35,6 +36,8 @@ with sync_playwright() as pw:
 
     # ---- SEGUE FLUXO NORMAL ----
     pagina.get_by_role("button", name="Consultar Fibra").first.click()
+
+    time.sleep(5)
 
     response = contexto.request.get(
         "https://loja.vivo.com.br/bff/unicommerceTacticalB2CBff/v1/catalogs"

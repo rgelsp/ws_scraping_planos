@@ -1,11 +1,12 @@
 DATA,ISP,VELOCIDADE,SVAs,PRECO
-2026-05-12,Infornet,300,,89.9
-2026-05-12,Infornet,500,,99.9
-2026-05-12,Infornet,700,Disney+ ou Globo Play ou Telecine,129.9
-2026-05-12,Infornet,800,Disney+ ou Globo Play ou Telecine ou Premiere,149.9
-2026-05-12,Infornet,800,Premiere,159.9
-2026-05-12,Infornet,850,,159.9
-2026-05-12,Infornet,900,Telecine ou Globo Play,189.9
-2026-05-12,Infornet,900,Premiere,179.9
-2026-05-12,Infornet,950,,199.9
-2026-05-12,Infornet,1100,,249.9
+2026-06-24,Infornet,800,SKY + Amazon,89.99
+2026-06-24,Infornet,300,,89.99
+2026-06-24,Infornet,500,,99.99
+2026-06-24,Infornet,600,Deezer,109.99
+2026-06-24,Infornet,700,Telecine ou Globoplay ou SKY + Amazon,119.99
+2026-06-24,Infornet,700,Premiere ou Watch TV,129.99
+2026-06-24,Infornet,800,Globoplay ou Telecine,129.99
+2026-06-24,Infornet,800,SKY + Amazon ou Disney ou HBO Max ou Apple TV,129.99
+2026-06-24,Infornet,900,Telecine ou SKY + Amazon ou Globoplay ou Disney ou HBO Max ou Apple TV,149.99
+2026-06-24,Infornet,900,Globoplay ou Disney ou Globoplay ou SKY + Amazon ou Disney ou SKY + Amazon ou Globoplay ou Telecine,159.99
+2026-06-24,Infornet,1100,,249.99
