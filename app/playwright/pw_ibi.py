@@ -3,12 +3,18 @@
 
 from playwright.sync_api import sync_playwright
 from pathlib import Path
+import time
 
 with sync_playwright() as pw:
     navegador = pw.chromium.launch(headless=False)
     contexto = navegador.new_context()
     pagina = contexto.new_page()
-    pagina.goto("https://ibitelecom.com.br/internet-fibra-otica-para-voce")
+    pagina.goto("https://ibitelecom.com.br/#planos")
+    time.sleep(3)
+    pagina.get_by_role("button", name="Selecionar cidade").click()
+    time.sleep(3)
+    pagina.get_by_role("button", name="Governador Valadares").click()
+    time.sleep(3)
 
     # ---- CAPTURA DO HTML ----
     html = pagina.content()
