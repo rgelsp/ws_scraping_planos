@@ -9,7 +9,7 @@ with sync_playwright() as pw:
     navegador = pw.chromium.launch(headless=False)
     contexto = navegador.new_context()
     pagina = contexto.new_page()
-    pagina.goto("https://ouronet.com.br/cidade/ouro-branco/")
+    pagina.goto("https://ouronet.com.br/planos/")
 
     time.sleep(7)
 

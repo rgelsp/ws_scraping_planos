@@ -1,7 +1,11 @@
 DATA,ISP,VELOCIDADE,SVAs,PRECO
-2026-08-12,Super,100,"HBOMax*, Super i Play*, Desconto Energia**",84.9
-2026-08-12,Super,250,"HBOMax*, Super i Play*, Desconto Energia**",89.9
-2026-08-12,Super,300,"HBOMax*, Super i Play*, Desconto Energia**",94.9
-2026-08-12,Super,450,"HBOMax*, Super i Play*, Desconto Energia**",99.9
-2026-08-12,Super,500,"HBOMax*, Super i Play*, Desconto Energia**",104.9
-2026-08-12,Super,800,"HBOMax*, Super i Play*, Desconto Energia**",129.9
+2026-09-22,Super,100,,84.9
+2026-09-22,Super,280,,89.9
+2026-09-22,Super,400,,94.9
+2026-09-22,Super,500,,99.9
+2026-09-22,Super,680,,109.9
+2026-09-22,Super,800,,119.9
+2026-09-22,Super,280,Telecine,109.9
+2026-09-22,Super,400,Telecine,114.9
+2026-09-22,Super,500,"Telecine , HBO Max",129.9
+2026-09-22,Super,800,"Premiere , Telecine , HBO Max",174.9

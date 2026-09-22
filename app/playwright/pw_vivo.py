@@ -38,7 +38,7 @@ with sync_playwright() as pw:
     print(f"{len(planos_na_pagina)} planos encontrados na página.")
 
     # ---- SEGUE FLUXO NORMAL ----
-    pagina.get_by_role("button", name="Consultar Fibra").first.click()
+    pagina.get_by_role("link", name="Contratar Fibra + Netflix").first.click()
 
     time.sleep(5)
 

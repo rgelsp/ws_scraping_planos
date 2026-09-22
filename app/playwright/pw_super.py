@@ -10,7 +10,7 @@ with sync_playwright() as pw:
     contexto = navegador.new_context()
     pagina = contexto.new_page()
     pagina.goto("https://superitelecom.com.br/")
-    time.sleep(5)
+    time.sleep(10)
 
     # ---- CAPTURA DO HTML ----
     html = pagina.content()

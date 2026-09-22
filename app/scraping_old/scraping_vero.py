@@ -15,6 +15,7 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from loguru import logger
 from datetime import datetime
+import re
 
 # ===========================================================================
 # FUNÇÃO PARA OBTER O HTML DE UMA PÁGINA VIA HTTP
@@ -78,35 +79,57 @@ def raspar_html(texto_html):
 
     lista_planos_tratados = []
 
-    # Localizar todos os <a> com onclick da função
     elementos = soup.find_all(
         "a",
         onclick=lambda x: x and "Tags.PlanCarrouselClick" in x
     )
 
     for el in elementos:
-        onclick = el["onclick"]
 
-        partes = onclick.split("(")[1].split(")")[0].split(", ")
+        onclick = el.get("onclick")
+
+        # Captura os 8 argumentos da função.
+        # O último argumento pode conter vírgulas.
+        match = re.search(
+            r"Tags\.PlanCarrouselClick\("
+            r"'([^']*)',\s*"       # 0 - TITULO
+            r"'([^']*)',\s*"       # 1
+            r"'([^']*)',\s*"       # 2
+            r"'([^']*)',\s*"       # 3
+            r"([\d.]+),\s*"        # 4 - PRECO
+            r"'([^']*)',\s*"       # 5 - VELOCIDADE
+            r"'([^']*)',\s*"       # 6
+            r"'([^']*)'"           # 7 - SVAs
+            r"\)",
+            onclick
+        )
+
+        if not match:
+            continue
+
+        partes = match.groups()
 
         dicionario_plano = {
-            "TITULO": partes[0].strip("'"),
-            "VELOCIDADE": partes[5].strip("'"),
+            "TITULO": partes[0],
+            "VELOCIDADE": partes[5],
             "PRECO": float(partes[4]),
-            "SVAs": partes[7].strip("'")
+            "SVAs": partes[7]
         }
 
         lista_planos_tratados.append(dicionario_plano)
 
     df_planos = pd.DataFrame(lista_planos_tratados)
 
-    # Obter nome do município
-    nome_municipio = soup.find(
+    # Obter município
+    elemento_municipio = soup.find(
         "button",
         class_=lambda c: c and "font-bold" in c
-    ).get_text(strip=True)
+    )
 
-    df_planos["MUNICIPIO"] = nome_municipio
+    if elemento_municipio:
+        df_planos["MUNICIPIO"] = elemento_municipio.get_text(strip=True)
+    else:
+        df_planos["MUNICIPIO"] = None
 
     return df_planos
 
