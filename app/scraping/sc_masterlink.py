@@ -1,37 +1,38 @@
 # %% [markdown]
-# # Scraping Planos WFT
-# Página do provedor: https://www.niointernet.com.br/
-
-# %% Bibliotecas ---------------------------------------------------------------
+# # **Scraping Planos Masterlink**
+#
+# _Página do provedor: https://masterlinktelecom.net/_
+# %%
+# Bibliotecas
 import pandas as pd
+import numpy as np
 from pathlib import Path
 from bs4 import BeautifulSoup
 from datetime import date
-
-# %% 1 Extração ===============================================================
-provedor = "WFT"
-print(f"{provedor}: Extração")
-
-# %% 1.1 Obter lista de planos -------------------------------------------------
-caminho_html = "../../data/scraped/wft.html"
+import re
+provedor = "MASTERLINK"
+# %% [markdown]
+# ## **1. Extração**
+# %%
+# Obter lista de planos
+caminho_html = '../../data/scraped/masterlink.html'
 
 if "__file__" in globals():  # .py
     texto_html = (Path(__file__).resolve().parent / caminho_html).resolve().read_text(encoding="utf-8")
 else:  # .ipynb
     texto_html = open(caminho_html, encoding="utf-8").read()
-
 soup = BeautifulSoup(texto_html, "html.parser")
-conteiner = soup.find_all("div", class_="g-cols")[1]
-planos = conteiner.find_all("div", class_="vc_column-inner")
-
-# %% 1.2 Extrair informações dos planos ----------------------------------------
+conteiner_planos = soup.find("div", id="planosnet")
+planos = conteiner_planos.find_all("div", class_="e-con-full")
+len(planos)
+# %%
+# Extrair informações dos planos
 def raspar_plano(plano):
-    velocidade = plano.find_all("p")[0].text
-    preco = plano.find_all("p")[1].text
-    conteiner_svas = plano.find("li", class_="w-pricing-item-feature")
-    lista_svas = [i.text for i in conteiner_svas.find_all("li")]
-    svas = ", ".join(i.strip() for i in lista_svas if i.strip())
-
+    velocidade = plano.find_all("h2")[0].text
+    pre_preco = plano.find_all("h2")
+    preco = ".".join([i.text for i in pre_preco])
+    pre_sva = plano.find_all("span", class_="elementor-icon-list-text")
+    svas = ", ".join([i.text for i in pre_sva])
     return {"velocidade": velocidade,
             "preco": preco,
             "svas": svas}
@@ -43,34 +44,33 @@ for i in planos:
     dados.append(dados_plano)
 
 df = pd.DataFrame(dados)
+df = df[df["svas"] != ""]
 df
-
-# %% 2.1 Tratamento =============================================================
-print(f"{provedor}: Tratamento")
+# %% [markdown]
+# ## **2. Tratamento**
+# %%
 df_tratado = df.copy()
 
 # Data e provedor
 df_tratado["DATA"] = date.today().strftime("%Y-%m-%d")
-df_tratado["ISP"] = "WFT"
+df_tratado["ISP"] = "Masterlink"
 
 # Velocidade
-df_tratado["VELOCIDADE"] = df_tratado["velocidade"].astype(int)
+df_tratado["VELOCIDADE"] = df_tratado["velocidade"].str.extract(r"(\d+\.?\d*)")
 
 # PRECO
 df_tratado["PRECO"] = (
-    df_tratado["preco"]
-    .astype(str)
-    .str.replace(",", ".", regex=False)
-    .str.extract(r"(\d+\.?\d*)")[0]
+    df_tratado["preco"].str.split("$").str[1]
+    .str.replace(r"\D", "", regex=True)
     .astype(float)
-)
+) / 100
 
 # SVAs
 df_tratado["SVAs"] = df_tratado["svas"]
 
 #Seleção de colunas
 df_tratado = df_tratado[["DATA", "ISP", "VELOCIDADE", "SVAs", "PRECO"]]
-df_tratado
+print(df_tratado.head())
 
 # %% 3 Carga =========================================================================
 nome_arq = df_tratado["DATA"].max() + "-" + provedor + ".csv"
