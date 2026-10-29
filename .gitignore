@@ -177,3 +177,6 @@ pyrightconfig.json
 
 #POETRY
 poetry.lock
+
+# Ignorar todos os arquivos da pasta data
+data/

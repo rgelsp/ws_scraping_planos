@@ -65,7 +65,7 @@ with sync_playwright() as pw:
 
     # ---- SALVA JSON BRUTO (backup) ----
     base_dir = Path(__file__).resolve().parent
-    path_json = (base_dir / "../../data/scraped/vivo.json").resolve()
+    path_json = (base_dir / "../../data/raw/vivo.json").resolve()
     path_json.parent.mkdir(parents=True, exist_ok=True)
 
     with open(path_json, "w", encoding="utf-8") as f:

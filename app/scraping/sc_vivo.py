@@ -15,7 +15,7 @@ import re
 provedor = "VIVO"
 
 # %% 1.1 Ler arquivo JSON ------------------------------------------------------
-caminho_json = "../../data/scraped/vivo.json"
+caminho_json = "../../data/raw/vivo.json"
 
 if "__file__" in globals():  # .py
     texto_json = (Path(__file__).resolve().parent / caminho_json).resolve().read_text(encoding="utf-8")
@@ -67,7 +67,7 @@ nome_arq = df_tratado["DATA"].max() + "-" + provedor + ".csv"
 pasta = r"\\fileserver\arquivos\Estrategia Comercial\2. POWER BI\ECM - Radar Mercado\ScrapingPlanos"
 Path(pasta).mkdir(parents=True, exist_ok=True)
 df_tratado.to_csv(Path(pasta) / nome_arq, index=False)
-print(f"🟢 {provedor}: Carga | {nome_arq} salvo!")
+print(f"{provedor}: Carga | {nome_arq} salvo!")
 
 # FIM ================================================================================
 

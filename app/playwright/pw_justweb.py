@@ -15,7 +15,7 @@ with sync_playwright() as pw:
 
     # --- SALVANDO ARQUIVO ---
     base_dir = Path(__file__).resolve().parent
-    path_html = (base_dir / "../../data/scraped/justweb.html").resolve()
+    path_html = (base_dir / "../../data/raw/justweb.html").resolve()
     path_html.parent.mkdir(parents=True, exist_ok=True)
     with open(path_html, "w", encoding="utf-8") as f:
         f.write(html)

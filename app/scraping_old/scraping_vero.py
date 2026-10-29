@@ -203,7 +203,7 @@ def carga(df):
     # Obtém a data atual para define o nome do arquivo
     # Salva o DataFrame em CSV com separador ","
     #nome_arquivo = "/opt/airflow/dags/planos_concorrencia/exported/vero.csv"
-    nome_arquivo = "data/scraped/vero.csv"
+    nome_arquivo = "data/raw/vero.csv"
     df.to_csv(nome_arquivo, index=False, sep=",", encoding="utf-8-sig")
     logger.info("Dados carregados com sucesso.")
 
